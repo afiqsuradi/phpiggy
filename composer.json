@@ -1,0 +1,12 @@
+{
+  "name": "afiq/phpiggy",
+  "description": "A PHP application for tracking expenses",
+  "type": "project",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/App",
+      "Framework\\": "src/Framework"
+    }
+  }
+}
