@@ -2,10 +2,20 @@
 
 namespace App\Controllers;
 
+use Framework\TemplateEngine;
+use App\Config\Paths;
+
 class HomeController
 {
+    private TemplateEngine $view;
+
+    public function __construct()
+    {
+        $this->view = new TemplateEngine(Paths::VIEW);
+    }
+
     public function home()
     {
-        echo "Homepage";
+        $this->view->render("homepage.php", ['title' => "Hello World"]);
     }
 }
