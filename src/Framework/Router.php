@@ -26,15 +26,14 @@ class Router
         return $path;
     }
 
-    public function dispatch(string $method, string $path)
+    public function dispatch(string $method, string $path, Container $container = null)
     {
-
         $path = $this->normalizePath($path);
         $method = strtoupper($method);
         foreach ($this->routes as $route) {
             if (!preg_match("#^{$route['path']}$#", $path) || $route['method'] !== $method) continue;
             [$class, $function] = $route['controller'];
-            $classInstance = new $class;
+            $classInstance = $container ? $container->resolve($class) : new $class;
             $classInstance->$function();
         }
     }
