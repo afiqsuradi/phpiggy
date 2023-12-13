@@ -13,6 +13,7 @@ include __DIR__ . "/function.php";
 class Container
 {
     private array $definitions = [];
+    private array $resolved = [];
 
     public function addDefinition(array $newDefinitions)
     {
@@ -57,7 +58,14 @@ class Container
         if (!array_key_exists($id, $this->definitions)) {
             throw new ContainerException("Class {$id} does not exists within Container definition.");
         }
+
+        if (array_key_exists($id, $this->resolved)) {
+            return $this->resolved[$id];
+        }
+
         $factory = $this->definitions[$id];
-        return $factory();
+        $product = $factory();
+        $this->resolved[$id] = $product;
+        return $product;
     }
 }

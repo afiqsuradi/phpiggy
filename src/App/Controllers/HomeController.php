@@ -16,6 +16,6 @@ class HomeController
 
     public function home()
     {
-        echo $this->view->render("homepage.php", ['title' => "Homepage - PHPiggy"]);
+        echo $this->view->render("homepage.php");
     }
 }
